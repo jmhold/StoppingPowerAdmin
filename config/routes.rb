@@ -1,7 +1,9 @@
 BradoSp::Application.routes.draw do
   devise_for :users
 
-  root :to => 'tests#index'
+  resources :studies
+
+  root :to => 'studies#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

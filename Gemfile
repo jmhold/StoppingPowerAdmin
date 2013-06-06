@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'jquery-rails'
 gem 'devise'
+gem 'carrierwave'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,6 +17,12 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem "capybara-webkit"
 end
 
 # To use ActiveModel has_secure_password

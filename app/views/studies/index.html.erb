@@ -1,0 +1,7 @@
+<h3>Available Studies</h3>
+
+<ul>
+<% @studies.each do |study| %>
+<li><%= link_to study.name, study_path(study) %></li>
+<% end %>
+</ul>
