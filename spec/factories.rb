@@ -20,7 +20,7 @@ FactoryGirl.define do
   factory :pair do |pair|
     study
     page_number 1
-    study_image1 { create(:study_image, study: study) }
-    study_image2 { create(:study_image, study: study) }
+    choice1 { create(:study_image, study: study) }
+    choice2 { create(:study_image, study: study) }
   end
 end

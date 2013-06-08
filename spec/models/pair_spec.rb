@@ -6,7 +6,7 @@ describe Pair do
       @study = FactoryGirl.create(:study)      
       @study_image1 = FactoryGirl.create(:study_image, :study => @study)
       @study_image2 = FactoryGirl.create(:study_image, :study => @study)
-      @attr = { :study => @study, :study_image1 => @study_image1, :study_image2 => @study_image2, :page_number => 1 }
+      @attr = { :study => @study, :choice1 => @study_image1, :choice2 => @study_image2, :page_number => 1 }
     end
     
     it "should create with valid attributes" do
@@ -15,8 +15,8 @@ describe Pair do
     
     it "should require a study and two study images" do
       Pair.new(@attr.merge(:study => nil)).should_not be_valid
-      Pair.new(@attr.merge(:study_image1 => nil)).should_not be_valid
-      Pair.new(@attr.merge(:study_image2 => nil)).should_not be_valid
+      Pair.new(@attr.merge(:choice1 => nil)).should_not be_valid
+      Pair.new(@attr.merge(:choice2 => nil)).should_not be_valid
     end
     
     it "should require a page number" do
