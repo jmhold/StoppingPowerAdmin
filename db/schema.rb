@@ -11,16 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606033913) do
+ActiveRecord::Schema.define(:version => 20130608202736) do
 
   create_table "images", :force => true do |t|
     t.string   "info"
-    t.integer  "test_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "images", ["test_id"], :name => "index_images_on_test_id"
+  create_table "pairs", :force => true do |t|
+    t.integer  "study_id"
+    t.integer  "study_image1_id"
+    t.integer  "study_image2_id"
+    t.integer  "page_number"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "pairs", ["study_id"], :name => "index_pairs_on_study_id"
 
   create_table "studies", :force => true do |t|
     t.string   "name"
@@ -29,6 +37,16 @@ ActiveRecord::Schema.define(:version => 20130606033913) do
   end
 
   add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true
+
+  create_table "study_images", :force => true do |t|
+    t.integer  "study_id"
+    t.integer  "image_id"
+    t.integer  "click_count"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "study_images", ["study_id", "image_id"], :name => "index_study_images_on_study_id_and_image_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
