@@ -3,8 +3,11 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'devise'
 gem 'carrierwave'
+gem 'mini_magick'
+gem 'jbuilder'
 
 # Gems used only for assets and not required
 # in production environments by default.

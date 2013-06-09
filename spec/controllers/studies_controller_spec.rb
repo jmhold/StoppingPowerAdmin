@@ -78,5 +78,31 @@ describe StudiesController do
         response.body.should have_link("B", :href => study_path(@study2))
       end
     end
+    
+    describe "create" do
+      it "should create a survey" do
+        lambda do
+          post :create, :study => { :name => "WHAT"}
+        end.should change(Study, :count).by(1)
+      end
+      
+      it "should properly parse image ids into pairs" do
+        image1 = FactoryGirl.create(:image)
+        image2 = FactoryGirl.create(:image)
+        image3 = FactoryGirl.create(:image)
+        image4 = FactoryGirl.create(:image)
+        
+        pairs = [[image3.id, image2.id],[image4.id,image1.id]].to_json
+        
+        post :create, :study => {:name => "AAA", :pairs => pairs }
+        
+        study = Study.find_by_name("AAA")
+        p study.pairs
+        study.pairs[0].choice1.image.should == image3
+        study.pairs[0].choice2.image.should == image2
+        study.pairs[1].choice1.image.should == image4
+        study.pairs[1].choice2.image.should == image1
+      end
+    end #create
   end
 end

@@ -1,0 +1,24 @@
+<%= form_for @image, :remote => true do %>
+Upload Images: 
+<input id="fileupload" type="file" name="image[info]" multiple>
+<script src="/jquery_fileupload/jquery.iframe-transport.js"></script>
+<script src="/jquery_fileupload/jquery.fileupload.js"></script>
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        url: '<%= images_path %>',
+        done: function (e, data) {
+            $.each(data.result, function (index, file) { 
+               $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
+            });
+        }
+    });
+});
+</script>
+
+<ul id="thumbs" class="cf">
+<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
+</ul>
+
+<% end %>

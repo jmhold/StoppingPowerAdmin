@@ -5,6 +5,9 @@ BradoSp::Application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+  
+  # Disable token authentication on forms using ajax, it will be fetched with the meta tag.
+  config.action_view.embed_authenticity_token_in_remote_forms = false
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true

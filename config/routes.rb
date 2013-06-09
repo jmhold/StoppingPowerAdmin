@@ -2,7 +2,8 @@ BradoSp::Application.routes.draw do
   devise_for :users
 
   resources :studies
-
+  resources :images, :except => [:update, :edit]
+  
   root :to => 'studies#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

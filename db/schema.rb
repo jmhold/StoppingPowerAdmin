@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20130608202736) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "study_images", ["study_id", "image_id"], :name => "index_study_images_on_study_id_and_image_id", :unique => true
+  add_index "study_images", ["study_id", "image_id"], :name => "index_study_images_on_study_id_and_image_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

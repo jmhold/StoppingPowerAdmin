@@ -8,6 +8,6 @@ class CreateStudyImages < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :study_images, [:study_id, :image_id], :unique => true
+    add_index :study_images, [:study_id, :image_id]
   end
 end
