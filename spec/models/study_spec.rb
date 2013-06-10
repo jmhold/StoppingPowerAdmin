@@ -12,7 +12,7 @@ describe Study do
     end
   end
   
-  describe "study images" do
+  describe "properties" do
     before(:each) do
       @study = FactoryGirl.create(:study)
     end
@@ -23,6 +23,10 @@ describe Study do
     
     it "should have pairs of images" do
       @study.should respond_to(:pairs)
+    end
+    
+    it "should have a published flag" do
+      @study.should respond_to(:published)
     end
   end
   

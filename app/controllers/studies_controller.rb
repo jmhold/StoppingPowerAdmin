@@ -17,9 +17,22 @@ class StudiesController < ApplicationController
   end
   
   def edit
+    @study = Study.find(params[:id])
+    if(@study.published)
+      flash[:error] = "You cannot edit a survey that has already been published."
+      render 'show'
+    end
   end
   
   def update
+    @study = Study.find(params[:id])
+    pairs = params[:study].delete(:pairs)
+    if(@study.update_attributes(params[:study]))
+      update_pairs @study, pairs
+      render 'show'
+    else
+      render 'edit'
+    end
   end
   
   def destroy
@@ -28,7 +41,6 @@ class StudiesController < ApplicationController
   def update_pairs study, pairs_json
     if(pairs_json)
       pairs = JSON.parse(pairs_json)
-              p pairs
       pairs.each_with_index do |images, page|
         pair = study.pairs.build
         pair.choice1 = study.study_images.create(:image => Image.find(images[0]))

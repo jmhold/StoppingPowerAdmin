@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608202736) do
+ActiveRecord::Schema.define(:version => 20130610190522) do
 
   create_table "images", :force => true do |t|
     t.string   "info"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130608202736) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "published"
   end
 
   add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true

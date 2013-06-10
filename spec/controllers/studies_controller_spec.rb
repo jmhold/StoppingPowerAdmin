@@ -97,12 +97,61 @@ describe StudiesController do
         post :create, :study => {:name => "AAA", :pairs => pairs }
         
         study = Study.find_by_name("AAA")
-        p study.pairs
+        
         study.pairs[0].choice1.image.should == image3
         study.pairs[0].choice2.image.should == image2
         study.pairs[1].choice1.image.should == image4
         study.pairs[1].choice2.image.should == image1
       end
     end #create
+    
+    describe "edit" do
+      it "should show an error if study is published" do
+        @study.published = true
+        @study.save!
+        get :edit, :id => @study
+        flash[:error].should =~ /been published/i
+      end
+      
+      it "should render 'show' if study is published" do
+        @study.published = true
+        @study.save!
+        get :edit, :id => @study
+        response.should render_template 'show'
+      end
+      
+      it "should be successful if study is not published" do
+        get :edit, :id => @study
+        flash[:error].should be_nil
+        response.should be_successful
+      end
+    end # edit
+    
+    describe "update" do
+      it "should update the survey" do
+        @study.name = "Hello!"
+        @study.save!
+        put :update, :id => @study, :study => { :name => "new name" }
+        Study.find(@study.id).name.should eq("new name")
+      end
+      
+      it "should properly parse image ids into pairs" do
+        image1 = FactoryGirl.create(:image)
+        image2 = FactoryGirl.create(:image)
+        image3 = FactoryGirl.create(:image)
+        image4 = FactoryGirl.create(:image)
+        
+        pairs = [[image3.id, image2.id],[image4.id,image1.id]].to_json
+        
+        put :update, :id => @study, :study => {:name => "AAA", :pairs => pairs }
+        
+        study = Study.find_by_name("AAA")
+        
+        study.pairs[0].choice1.image.should == image3
+        study.pairs[0].choice2.image.should == image2
+        study.pairs[1].choice1.image.should == image4
+        study.pairs[1].choice2.image.should == image1
+      end
+    end
   end
 end
