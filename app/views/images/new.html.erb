@@ -1,6 +1,13 @@
 <%= form_for @image, :remote => true do %>
-Upload Images: 
-<input id="fileupload" type="file" name="image[info]" multiple>
+<h3>Upload Images</h3>
+<p>Add images to the gallery so they can be included in studies.</p>
+
+<span class="btn btn-success fileinput-button">
+	<i class="icon-plus icon-white"></i>
+    <span>Upload files...</span>
+    <input id="fileupload" type="file" name="image[info]" multiple>
+</span>
+<% end %>
 <script src="/jquery_fileupload/jquery.iframe-transport.js"></script>
 <script src="/jquery_fileupload/jquery.fileupload.js"></script>
 <script>
@@ -8,17 +15,26 @@ $(function () {
     $('#fileupload').fileupload({
         dataType: 'json',
         url: '<%= images_path %>',
+		progressall: function (e, data) {
+		        var progress = parseInt(data.loaded / data.total * 100, 10);
+		        $('#progress').css(
+		            'width',
+		            progress + '%'
+		        );
+		    },
         done: function (e, data) {
             $.each(data.result, function (index, file) { 
-               $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#thumbs');
+               $('<div class="span2 thumb_box gallery_row"><img src="'+file.thumbnail_url+'" class="thumb">').appendTo('#thumbs');
             });
         }
     });
 });
 </script>
 
-<ul id="thumbs" class="cf">
-<!-- json-ajax response here, see fileupload script above, .appendTo css id:"thumbs"-->
-</ul>
+<div class="progress progress-striped">
+  <div id="progress" class="bar bar-success" style="width: 0%;"></div>
+</div>
 
-<% end %>
+
+<div id="thumbs" class="span12 clearfix">
+</div>
