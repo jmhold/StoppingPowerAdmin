@@ -1,0 +1,18 @@
+<% if signed_in? %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+	<ul class="nav">
+		<li><%= link_to "Studies", studies_path %></li>
+		<li><%= link_to "Images", images_path %></li>
+		<li><%= link_to "Reports", "#" %></li>
+ 	</ul>
+	<div class="pull-right">
+		<ul class="nav">
+	    	<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+		</ul>
+	 </div>
+	</div>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,66 @@
+.login_bg {
+	background-image: url(/assets/login_bg.jpg);
+	background-repeat: no-repeat;
+	padding-top:100px;
+}
+
+#login {
+	width: 400px;
+	height: 250px;
+	margin: 20px auto;
+	border: 5px #f4f4f4 solid;
+	min-width: 200px;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+}
+
+#login .inner {
+	background-color: #FFF;
+	border: 1px #cccccc solid;
+	height: 247px;
+	overflow: hidden;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	text-align:center;
+	padding: 0px 40px;
+}
+
+#login #user_email {
+	background-image: url(/assets/ic_username.png);
+}
+
+#login #user_password {
+	background-image: url(/assets/ic_password.png);
+	margin-top: 0px;
+	margin-bottom:20px;
+}
+
+#login .textfield {
+	color: #000000;
+	font-size: 18px;
+	background-repeat: no-repeat;
+	text-align: center;
+	height: 35px;
+	background-position: 2px 3px;
+	line-height: 35px;
+	width: 100%;
+	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+	margin: 15px 0px 15px 0px;
+	padding: 0px 7px 0px 7px;
+	display: inline-block;
+}
+
+#login #user_remember_me {
+	width: 20px;
+	height: 20px;
+	margin-bottom: 8px;
+	margin-right: 4px;
+}
+
+#login label {
+	display: inline-block;
+}
+
+#login .button {
+	padding: 2px 20px;
+}
