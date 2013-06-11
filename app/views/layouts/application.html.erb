@@ -8,12 +8,12 @@
 </head>
 <body>
   <%= render 'layouts/header' %>
-  <div class="container">
+  <div class="container mainpage">
     <% unless flash.empty? %>
     <div class="row">
       <div class="span6 offset3">
         <% flash.each do |key, msg| %>
-		  <div class="alert<%= key == :success ? ' alert-success' : ' alert-error' %>">
+		  <div class="alert<%= key == :error ? ' alert-error' : ' alert-notice' %>">
 		  <a class="close" data-dismiss="alert" href="#">×</a>
             <%= msg %>
 		  </div>

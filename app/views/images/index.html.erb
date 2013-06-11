@@ -1,0 +1,19 @@
+<div class="widget span12 clearfix heading">
+    <div class="widget-header"><span><i class="icon-camera"></i>Images</span>
+		<a href="<%= new_image_path %>"><button class="btn-success widget-button pull-right">Upload More Images</button></a>
+	</div>
+    <div>
+	<% @images.each_with_index do |image, i| %>
+		<% if(i % 6 == 0) %>
+		<div class="row gallery_row">
+		<% end %>
+		  <div class="span2 thumb_box">
+		  	<%= link_to image_tag(image.info.thumb.url, :class => 'thumb'), image.info.url %><br />
+			<%= image.info.identifier %>
+		  </div>
+		<% if (i % 6 == 5) %>
+		</div>
+		<% end %>
+	<% end %>
+    </div>
+</div>

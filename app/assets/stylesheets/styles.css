@@ -1,0 +1,77 @@
+body {
+	background-image: url(/assets/login_bg.jpg);
+	background-repeat: no-repeat;
+	background-position-y: 40px;
+	padding-top:60px;
+}
+
+.mainpage {
+	margin-top:50px;
+}
+
+.heading {
+	margin-top: 40px;
+}
+
+.topcolumn {
+}
+
+.widget {
+	border: 1px solid #cdcdcd;
+	margin: 0px 0 20px 0;
+}
+.widget.noborder {
+	border : none;
+}
+.widget .widget-header.border {
+	border:1px solid #cdcdcd;
+	border-bottom:none;
+}
+.widget .widget-header {
+	height: 40px;
+	border-bottom: none;
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 19%, #ededed 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(19%, #ffffff), color-stop(100%, #ededed));
+	background: -webkit-linear-gradient(top, #ffffff 19%, #ededed 100%);
+	background: -o-linear-gradient(top, #ffffff 19%, #ededed 100%);
+	background: -ms-linear-gradient(top, #ffffff 19%, #ededed 100%);
+	background: linear-gradient(top, #ffffff 19%, #ededed 100%);
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
+}
+.widget .widget-header span {
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 11px 0 0 15px;
+	float: left;
+}
+.widget .widget-header span img,
+.widget .widget-header span i {
+	margin-right:5px;
+}
+.widget .widget-content {
+	background: #FFF url("assets/inner-shadow.png") repeat-x;
+	border-top: 1px solid #cecece;
+	padding: 20px;
+	min-height: 50px;
+}
+
+.widget-button {
+	margin-top: 5px;
+	margin-right: 20px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+#button_top {
+	height: 20px;
+	width: auto;
+	text-align: right;
+	float: right;
+	padding: 7px 7px 0 0;/*	border: 1px #CCCCCC solid;*/
+}
+#button_top img {
+	margin-bottom: -3px;
+	padding-right: 0px;
+}

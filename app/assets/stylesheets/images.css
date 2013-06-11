@@ -1,0 +1,14 @@
+.gallery_row {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.thumb_box {
+	text-align: center;
+}
+
+.thumb {
+	border: 8px #cccccc solid;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
