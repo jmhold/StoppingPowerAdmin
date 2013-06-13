@@ -13,7 +13,7 @@ class StudiesController < ApplicationController
     pairs = params[:study].delete(:pairs)
     @study = Study.create(params[:study])
     update_pairs @study, pairs
-    render 'show'
+    redirect_to :action => 'index'
   end
   
   def edit
@@ -36,6 +36,15 @@ class StudiesController < ApplicationController
   end
   
   def destroy
+    Study.find(params[:id]).delete
+    redirect_to :action => 'index'
+  end
+  
+  def publish
+    @study = Study.find(params[:id])
+    @study.published = true
+    @study.save
+    redirect_to :action => 'index'
   end
   
   def update_pairs study, pairs_json

@@ -152,6 +152,13 @@ describe StudiesController do
         study.pairs[1].choice1.image.should == image4
         study.pairs[1].choice2.image.should == image1
       end
+    end # update
+    
+    describe "publish" do
+      it "should publish the survey" do
+        put :publish, :id => @study
+        Study.find(@study.id).should be_published
+      end
     end
   end
 end

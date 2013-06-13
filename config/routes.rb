@@ -1,7 +1,11 @@
 BradoSp::Application.routes.draw do
   devise_for :users
 
-  resources :studies
+  resources :studies do
+    member do
+      put 'publish'
+    end
+  end
   resources :images, :except => [:update, :edit]
   
   root :to => 'studies#index'
