@@ -1,4 +1,13 @@
+<script src="/edit_study.js"></script>
+
+<div class="container">
+<div class="span4">
 <h2>Create a new study</h2>
-<%= form_for @study do |f| %>
-	<%= f.label "Study Name" %> <%= f.text_field :name %>
-<% end %>
+	<%= render 'form' %>
+
+</div>
+<div class="span6 offset1 heading clearfix">
+	<%= render 'image_draggables'%>
+</div>
+
+</div>

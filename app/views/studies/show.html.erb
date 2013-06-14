@@ -1,0 +1,16 @@
+<h2>Study: <%= @study.name %></h2>
+
+<table id="pairs" class="table table-bordered table-striped data_table3 dataTable clearfix">
+	<thead>
+		<tr role="row">
+			<th>Page #</th>
+			<th>Left Image</th>
+			<th>Right Image</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @study.pairs.each_with_index do |pair, i| %>
+		<tr><td><%= i %></td><td><div class="pair_droppable"><%= image_tag(pair.choice1.image.info.thumb.url) %></div></td><td>
+		<div class="pair_droppable"><%= image_tag(pair.choice2.image.info.thumb.url) %></div></td></tr>
+	<% end %>
+</table>

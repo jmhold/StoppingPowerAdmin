@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.ui.widget
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
 //= require_tree .
