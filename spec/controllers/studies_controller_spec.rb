@@ -77,6 +77,37 @@ describe StudiesController do
         response.body.should have_link("A", :href => study_path(@study1))
         response.body.should have_link("B", :href => study_path(@study2))
       end
+      
+      describe "json" do
+        it "should return a json list of survey names" do
+          get :index, :format => :json
+          studies = JSON.parse(response.body)
+          studies[0]['name'].should == @study.name
+          studies[1]['name'].should == @study1.name
+          studies[2]['name'].should == @study2.name
+        end
+        
+        it "should return if the surveys are published" do
+          @study1.published = true
+          @study1.save!
+          get :index, :format => :json
+          studies = JSON.parse(response.body)
+          studies[0]['published'].should == false
+          studies[1]['published'].should == true
+        end
+        
+        it "should return a list of image pairs with the survey" do
+          pair1 = FactoryGirl.create(:pair, :study => @study, :page_number => 1)
+          pair2 = FactoryGirl.create(:pair, :study => @study, :page_number => 2)
+          
+          get :index, :format => :json
+          studies = JSON.parse(response.body)
+          studies[0]['pairs'][0][0].should == pair1.choice1.image.info.url
+          studies[0]['pairs'][0][1].should == pair1.choice2.image.info.url
+          studies[0]['pairs'][1][0].should == pair2.choice1.image.info.url
+          studies[0]['pairs'][1][1].should == pair2.choice2.image.info.url
+        end
+      end
     end
     
     describe "create" do

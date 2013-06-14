@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(:version => 20130610190522) do
 
   create_table "studies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.boolean  "published"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "published",  :default => false
   end
 
   add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true

@@ -10,4 +10,8 @@ class Pair < ActiveRecord::Base
   validates :choice1, :presence => true
   validates :choice2, :presence => true
   validates :page_number, :presence => true
+  
+  def as_json(options={})
+    super(options.merge(:only => [:page_number, :id])).merge({"choice1" => self.choice1.image.info.url, "choice2" => self.choice2.image.info.url })
+  end
 end

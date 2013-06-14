@@ -3,6 +3,10 @@ class StudiesController < ApplicationController
   
   def index
     @studies = Study.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @studies }
+    end
   end
   
   def show
