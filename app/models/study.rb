@@ -10,4 +10,14 @@ class Study < ActiveRecord::Base
   def as_json(options={})
     super(options).merge({"pairs" => self.pairs.as_json })
   end
+  
+  def to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << ["Study: #{self.name}", "", ""]
+      csv << ["Image Type", "Image URL", "Number of Selections"]
+      study_images.each do |study_image|
+        csv << [study_image.image.image_type, study_image.image.info.url, study_image.selections.count]
+      end
+    end
+  end
 end
