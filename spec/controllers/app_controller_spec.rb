@@ -10,7 +10,7 @@ describe AppController do
       expected = { :first_name => "first", :last_name => "last", :group_id => "id", :study_id => @study.id, :gender => "male", 
         :selections => [pair1.choice1.id, pair2.choice2.id] }
       
-      post 'result', :format => :json, :result => expected.to_json
+      post 'result', :format => :json, :result => expected
       
       result = Result.find_by_first_name("first")
       

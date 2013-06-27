@@ -9,7 +9,7 @@ class AppController < ApplicationController
   def result
     respond_to do |format|
       format.json {
-        result_json = JSON.parse(params[:result])
+        result_json = params["result"]
 
         selections = result_json.delete("selections")
                
