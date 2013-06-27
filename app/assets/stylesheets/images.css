@@ -30,3 +30,8 @@
   direction: ltr;
   cursor: pointer;
 }
+
+.edit_image .radio_label {
+	display: inline-block;
+	margin-left: 10px;
+}

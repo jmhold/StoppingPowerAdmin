@@ -1,5 +1,6 @@
 class Study < ActiveRecord::Base
-  attr_accessible :name
+  # caption
+  attr_accessible :name, :caption
   
   validates :name, :presence => true, :length => {:within => 1..50}
   

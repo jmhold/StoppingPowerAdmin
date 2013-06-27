@@ -8,8 +8,8 @@
 		<div class="row gallery_row">
 		<% end %>
 		  <div class="span2 thumb_box">
-		  	<%= link_to image_tag(image.info.thumb.url, :class => 'thumb'), image.info.url %><br />
-			<%= image.info.identifier %>
+		  	<%= link_to image_tag(image.info.thumb.url, :class => 'thumb'), edit_image_path(image) %><br />
+			<b>Type:</b> <%= image.image_type %>
 		  </div>
 		<% if (i % 6 == 5) %>
 		</div>

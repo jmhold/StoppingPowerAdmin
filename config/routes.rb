@@ -6,9 +6,14 @@ BradoSp::Application.routes.draw do
       put 'publish'
     end
   end
-  resources :images, :except => [:update, :edit]
   
-  resources :app, :only => [:index]
+  resources :images
+  
+  resources :app, :only => [:index] do
+    collection do
+      post 'result', :format => :json
+    end
+  end
   
   root :to => 'studies#index'
   # The priority is based upon order of creation:

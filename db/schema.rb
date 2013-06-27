@@ -11,12 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610190522) do
+ActiveRecord::Schema.define(:version => 20130627025853) do
 
   create_table "images", :force => true do |t|
     t.string   "info"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "caption"
+    t.string   "image_type", :default => "proposed"
   end
 
   create_table "pairs", :force => true do |t|
@@ -30,11 +32,29 @@ ActiveRecord::Schema.define(:version => 20130610190522) do
 
   add_index "pairs", ["study_id"], :name => "index_pairs_on_study_id"
 
+  create_table "results", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "group_id"
+    t.string   "gender"
+    t.integer  "study_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "selections", :force => true do |t|
+    t.integer  "study_image_id"
+    t.integer  "result_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "studies", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "published",  :default => false
+    t.string   "caption"
   end
 
   add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true
@@ -42,9 +62,8 @@ ActiveRecord::Schema.define(:version => 20130610190522) do
   create_table "study_images", :force => true do |t|
     t.integer  "study_id"
     t.integer  "image_id"
-    t.integer  "click_count"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "study_images", ["study_id", "image_id"], :name => "index_study_images_on_study_id_and_image_id"

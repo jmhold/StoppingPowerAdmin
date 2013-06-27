@@ -22,8 +22,23 @@ class ImagesController < ApplicationController
     end
   end
   
+  def edit
+    @image = Image.find(params[:id])
+  end
+  
+  def update
+    @image = Image.find(params[:id])
+    if(@image.update_attributes(params[:image]))
+      flash.now[:success] = "Image updated successfully!"
+    else
+      flash.now[:error] = "Unable to update image."
+    end
+    render 'edit'
+  end
+  
   def show
     @image = Image.find(params[:id])
+    render 'edit'
   end
   
   def index

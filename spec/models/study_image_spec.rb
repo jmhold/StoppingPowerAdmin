@@ -17,10 +17,4 @@ describe StudyImage do
       StudyImage.new(:image => @image).should_not be_valid
     end
   end
-  
-  describe "attributes" do
-    it "should have a click_count" do
-      FactoryGirl.create(:study_image, :study => @study).should respond_to(:click_count)
-    end
-  end
 end

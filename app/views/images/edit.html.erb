@@ -1,0 +1,16 @@
+<div class="span8 offset2">
+<%= link_to image_tag(@image.info.thumb.url), @image.info.url %>
+<p>
+<%= form_for @image do |f| %>
+	<b><%= f.label "Type" %></b>
+		<%= f.radio_button :image_type, "competitive", :checked => @image.image_type == "competitive" %>
+		<%= label_tag(:image_type_competitve ,"Competitive", :class => "radio_label") %><br />
+		
+		<%= f.radio_button :image_type, "proposed", :checked => @image.image_type == "proposed" %>
+		<%= label_tag(:image_type_proposed ,"Proposed", :class => "radio_label") %><br />
+	<br />
+	<b><%= f.label "Caption" %></b> <%= f.text_field :caption %><br />
+	<%= f.submit 'Save Changes' %>
+<% end %>
+</p>
+</div>
