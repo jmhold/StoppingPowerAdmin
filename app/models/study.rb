@@ -14,9 +14,9 @@ class Study < ActiveRecord::Base
   def to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << ["Study: #{self.name}", "", ""]
-      csv << ["Image Type", "Image URL", "Number of Selections"]
+      csv << ["Image Name","Image Type", "Image URL", "Number of Selections"]
       study_images.each do |study_image|
-        csv << [study_image.image.image_type, study_image.image.info.url, study_image.selections.count]
+        csv << [study_image.image.name, study_image.image.image_type, study_image.image.info.url, study_image.selections.count]
       end
     end
   end

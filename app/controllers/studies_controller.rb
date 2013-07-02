@@ -63,9 +63,16 @@ class StudiesController < ApplicationController
     redirect_to :action => 'index'
   end
   
+  def activate
+    @study = Study.find(params[:id])
+    @study.active = params[:active]
+    @study.save
+    redirect_to :action => 'index'
+  end
+  
   def update_pairs study, pairs_json
-    study.pairs.delete_all
     if(pairs_json)
+      study.pairs.delete_all
       pairs = JSON.parse(pairs_json)
       pairs.each_with_index do |images, page|
         pair = study.pairs.build

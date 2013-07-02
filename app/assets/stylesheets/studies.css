@@ -2,6 +2,12 @@
 	text-align: center;
 }
 
+#studies td .label {
+	font-size: 14px;
+	padding: 5px 12px;
+	display: inline-block;
+}
+
 #add_study {
 	margin-top: 15px;
 }

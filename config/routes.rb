@@ -4,6 +4,7 @@ BradoSp::Application.routes.draw do
   resources :studies do
     member do
       put 'publish'
+      put 'activate'
     end
   end
   

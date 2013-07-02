@@ -9,6 +9,7 @@
 		<%= f.radio_button :image_type, "proposed", :checked => @image.image_type == "proposed" %>
 		<%= label_tag(:image_type_proposed ,"Proposed", :class => "radio_label") %><br />
 	<br />
+	<b><%= f.label "Name" %></b> <%= f.text_field :name %><br />
 	<b><%= f.label "Caption" %></b> <%= f.text_field :caption %><br />
 	<%= f.submit 'Save Changes' %>
 <% end %>
