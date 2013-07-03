@@ -47,8 +47,8 @@
 	padding-left: 10px;
 }
 
-#images_widget {
+#study_form {
 	position: fixed;
-	overflow: scroll;
-	height:70%;
+	overflow: auto;
+	height:80%;
 }
