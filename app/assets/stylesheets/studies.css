@@ -44,5 +44,11 @@
 }
 
 #thumb_gallery {
-	text-align:center;
+	padding-left: 10px;
+}
+
+#images_widget {
+	position: fixed;
+	overflow: scroll;
+	height:70%;
 }
