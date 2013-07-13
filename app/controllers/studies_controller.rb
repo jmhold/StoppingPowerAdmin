@@ -19,7 +19,7 @@ class StudiesController < ApplicationController
   
   def new
     @study = Study.new
-    @images = Image.all
+    @images = Image.where(:deleted => false)
     @pairs_json = pairs_json(@study)
   end
   
@@ -32,7 +32,7 @@ class StudiesController < ApplicationController
   
   def edit
     @study = Study.find(params[:id])
-    @images = Image.all
+    @images = Image.where(:deleted => false)
     @pairs_json = pairs_json(@study)
     if(@study.published)
       flash[:error] = "You cannot edit a survey that has already been published."

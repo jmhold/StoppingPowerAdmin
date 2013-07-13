@@ -8,7 +8,11 @@ BradoSp::Application.routes.draw do
     end
   end
   
-  resources :images
+  resources :images do
+    collection do
+      post 'delete'
+    end
+  end
   
   resources :app, :only => [:index] do
     collection do

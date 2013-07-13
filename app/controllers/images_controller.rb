@@ -42,6 +42,18 @@ class ImagesController < ApplicationController
   end
   
   def index
-    @images = Image.all
+    @images = Image.where(:deleted => false)
+  end
+  
+  def delete
+    image_ids = params[:image_ids]
+    if(image_ids) 
+      image_ids.each do |id|
+        image = Image.find(id)
+        image.deleted = true
+        image.save!
+      end
+    end
+    redirect_to images_path
   end
 end

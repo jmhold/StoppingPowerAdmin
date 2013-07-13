@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702010348) do
+ActiveRecord::Schema.define(:version => 20130713172224) do
 
   create_table "images", :force => true do |t|
     t.string   "info"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130702010348) do
     t.string   "caption"
     t.string   "image_type", :default => "proposed"
     t.string   "name"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "pairs", :force => true do |t|

@@ -10,7 +10,7 @@ $(function() {
 
 	$('#add_pair').click(function() {
 		id = pairs.length
-		$('#pairs').append('<tr><td><div id="l'+ id + '" class="pair_droppable">Left<img class="thumb_dropped" /></div>'+
+		$('#pairs').append('<tr><td><b>'+(id+1)+'</b><div id="l'+ id + '" class="pair_droppable">Left<img class="thumb_dropped" /></div>'+
 		'<div id="r'+ id +'" class="pair_droppable">Right<img class="thumb_dropped" /></div></td></tr>')
 		set_droppable($('#l'+id));
 		set_droppable($('#r'+id));

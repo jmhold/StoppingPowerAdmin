@@ -1,5 +1,7 @@
 <div class="widget span12 clearfix heading">
+	<%= form_tag delete_images_path do %>
     <div class="widget-header"><span><i class="icon-camera"></i>Images</span>
+		<%= submit_tag 'Delete Images', :class => 'btn-danger widget-button pull-right' %>
 		<a href="<%= new_image_path %>"><button class="btn-success widget-button pull-right">Upload More Images</button></a>
 	</div>
     <div>
@@ -9,11 +11,13 @@
 		<% end %>
 		  <div class="span2 thumb_box">
 		  	<%= link_to image_tag(image.info.thumb.url, :class => 'thumb'), edit_image_path(image) %><br />
-			<b>Type:</b> <%= image.image_type %>
+			<b>Type:</b> <%= image.image_type %><br />
+			<b>Delete: </b><%= check_box_tag 'image_ids[]', image.id -%>
 		  </div>
 		<% if (i % 6 == 5) %>
 		</div>
 		<% end %>
+	<% end %>
 	<% end %>
     </div>
 </div>

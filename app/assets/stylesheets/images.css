@@ -7,6 +7,12 @@
 	text-align: center;
 }
 
+.thumb_box input {
+	width:20px;
+	height:20px;
+	margin-top:-2px;
+}
+
 .thumb {
 	border: 8px #cccccc solid;
 	border-radius: 10px;
