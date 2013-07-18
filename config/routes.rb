@@ -5,6 +5,7 @@ BradoSp::Application.routes.draw do
     member do
       put 'publish'
       put 'activate'
+      post 'copy'
     end
   end
   

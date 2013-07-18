@@ -20,4 +20,30 @@ class Study < ActiveRecord::Base
       end
     end
   end
+  
+  def copy
+    study = Study.create(:name => copy_name)
+    study.caption = self.caption
+    pairs.each do |pair|
+      pair_copy = study.pairs.build
+      pair_copy.choice1 = study.study_images.create(:image => pair.choice1.image)
+      pair_copy.choice2 = study.study_images.create(:image => pair.choice2.image)
+      pair_copy.page_number = pair.page_number
+      pair.save!
+    end
+    study.save!
+    study
+  end
+  
+  private
+    def copy_name
+      base_name = self.name + " copy"
+      num = 1
+      name = base_name
+      while(Study.find_by_name(name)) do
+        num += 1
+        name = base_name + " #{num}"
+      end
+      name
+    end
 end

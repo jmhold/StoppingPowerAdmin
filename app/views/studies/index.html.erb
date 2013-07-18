@@ -53,6 +53,7 @@
 					<i class="icon-list-alt icon-white"></i>
 					<span>CSV</span>
 				</a>
+				<%= link_to raw('<i class="icon-retweet icon-white"></i><span> Copy</span>'), copy_study_path(study, :active => true) , :method => 'post', :class => 'btn btn-default' %>
 			</td>
 		</tr>
 	<% end %>

@@ -56,6 +56,12 @@ class StudiesController < ApplicationController
     redirect_to :action => 'index'
   end
   
+  def copy
+    @study = Study.find(params[:id])
+    study_copy = @study.copy
+    redirect_to edit_study_path(study_copy)
+  end
+  
   def publish
     @study = Study.find(params[:id])
     @study.published = true
