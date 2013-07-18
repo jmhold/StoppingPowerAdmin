@@ -30,7 +30,7 @@ class Study < ActiveRecord::Base
         csv << [""]
         
         count1 += images[image1] if images[image1]
-        count2 ++ images[image2] if images[image2]
+        count2 += images[image2] if images[image2]
         
         images[image1] = count1
         images[image2] = count2
