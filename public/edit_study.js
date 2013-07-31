@@ -25,6 +25,11 @@ $(function() {
 	});
 	
 	$("form").submit(function() {
+		if($('#study_name').val().length <= 0) {
+			alert("Error: Study does not have a name.");
+			return false;
+		}
+		
 		unset_pair = false
 		for(var i=0; i< pairs.length; i++) {
 			pair = pairs[i]
@@ -35,7 +40,7 @@ $(function() {
 			}
 		}
 		if(unset_pair) {
-			alert("Error. One or more pairs contain blank images.");
+			alert("Error: One or more pairs contain blank images.");
 			return false;
 		}
        return true;
