@@ -14,7 +14,7 @@ $(function() {
 		'<div id="r'+ id +'" class="pair_droppable">Right<img class="thumb_dropped" /></div></td></tr>')
 		set_droppable($('#l'+id));
 		set_droppable($('#r'+id));
-		pairs.push([0,0])
+		pairs.push([-1,-1])
 	});
 	
 	pairs_json = $('#study_pairs_field').attr('value')
@@ -22,6 +22,23 @@ $(function() {
 	
 	$('.pair_droppable').each(function() {
 		set_droppable($(this))
+	});
+	
+	$("form").submit(function() {
+		unset_pair = false
+		for(var i=0; i< pairs.length; i++) {
+			pair = pairs[i]
+			for(var j=0; j<pair.length; j++) {
+				if(pair[j] == -1) {
+					unset_pair = true
+				}
+			}
+		}
+		if(unset_pair) {
+			alert("Error. One or more pairs contain blank images.");
+			return false;
+		}
+       return true;
 	});
 });
 
