@@ -52,7 +52,7 @@ class StudiesController < ApplicationController
   end
   
   def destroy
-    Study.find(params[:id]).delete
+    Study.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
   

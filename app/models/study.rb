@@ -4,8 +4,8 @@ class Study < ActiveRecord::Base
   
   validates :name, :presence => true, :length => {:within => 1..50}
   
-  has_many :study_images
-  has_many :pairs, :order => 'page_number ASC'
+  has_many :study_images, :dependent => :destroy
+  has_many :pairs, :order => 'page_number ASC', :dependent => :destroy
 
   def as_json(options={})
     super(options).merge({"pairs" => self.pairs.as_json })
