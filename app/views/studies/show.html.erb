@@ -1,4 +1,9 @@
 <h2>Study: <%= @study.name %></h2>
+<div id="study_info">
+<b>Description</b><%= @study.caption %><br />
+<b>Timer Length</b><%= @study.timer %> seconds<br />
+<b>Instructions</b><%= @study.instructions %><br />
+</div><br />
 
 <% if @study.published %>
 <span class="label label-success">Published</span>
@@ -9,7 +14,7 @@
 <span class="label label-info">Active</span>
 <% else %>
 <span class="label label-inverse">Inactive</span>
-<% end %>
+<% end %><br /><br />
 
 <% if !@study.published %>
 <a href="<%= edit_study_path(@study.id) %>" class="btn btn-info">

@@ -85,3 +85,35 @@
 	overflow-x: hidden;
 	height:80%;
 }
+
+#study_form .half_input {
+	display: inline-block;
+	width: 48%;
+}
+
+#study_form .half_input input {
+	display: inline-block;
+	width: 92%;
+}
+
+#study_form .full_input {
+	display: block;
+	width: 93%;
+}
+
+#study_form .box_input {
+	display: block;
+	width: 93%;
+	height: 80px;
+}
+
+#study_form label {
+	font-weight: bold;
+}
+
+#study_info b {
+	width: 120px;
+	display: inline-block;
+	margin: 3px;
+	font-size:16px;
+}

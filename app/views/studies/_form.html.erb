@@ -1,6 +1,8 @@
 <%= form_for @study do |f| %>
-	<%= f.label "Study Name" %> <%= f.text_field :name %> <br />
-	<%= f.label "Description" %> <%= f.text_field :caption %><br />
+	<div class="half_input"><%= f.label "Study Name" %><%= f.text_field :name %></div>
+	<div class="half_input"><%= f.label "Timer Length" %><%= f.text_field :timer %></div><br />
+	<%= f.label "Description" %> <%= f.text_field :caption, :class => "full_input" %>
+	<%= f.label "Instructions" %> <%= f.text_area :instructions, :class => "box_input" %><br />
 	<%= hidden_field_tag 'study[pairs]', @pairs_json, :id => 'study_pairs_field' %> 
 
 	<a href="#" id="add_pair" class="btn btn-success">Add Image Pair</a>

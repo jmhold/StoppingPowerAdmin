@@ -47,7 +47,7 @@ class StudiesController < ApplicationController
       update_pairs @study, pairs
       render 'show'
     else
-      render 'edit'
+      redirect_to :action => 'edit'
     end
   end
   

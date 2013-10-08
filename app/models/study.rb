@@ -1,8 +1,10 @@
 class Study < ActiveRecord::Base
   # caption
-  attr_accessible :name, :caption
+  attr_accessible :name, :caption, :instructions, :timer
   
   validates :name, :presence => true, :length => {:within => 1..50}
+  validates_numericality_of :timer
+  validates :instructions, :presence => true
   
   has_many :study_images, :dependent => :destroy
   has_many :pairs, :order => 'page_number ASC', :dependent => :destroy

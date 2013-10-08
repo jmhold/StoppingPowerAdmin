@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713172224) do
+ActiveRecord::Schema.define(:version => 20131008213402) do
 
   create_table "images", :force => true do |t|
     t.string   "info"
@@ -51,16 +51,8 @@ ActiveRecord::Schema.define(:version => 20130713172224) do
     t.datetime "updated_at",     :null => false
   end
 
-  create_table "studies", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "published",  :default => false
-    t.string   "caption"
-    t.boolean  "active",     :default => false
-  end
-
-  add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true
+# Could not dump table "studies" because of following StandardError
+#   Unknown type 'real' for column 'timer'
 
   create_table "study_images", :force => true do |t|
     t.integer  "study_id"

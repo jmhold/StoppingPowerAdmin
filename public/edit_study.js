@@ -44,6 +44,10 @@ function check_submit() {
 		alert("Error: Study does not have a name.");
 		return false;
 	}
+	if(!$('#study_timer').val().match('^[0-9]*\.[0-9]*$')) {
+		alert("Error: Timer value must be a number.");
+		return false;
+	}
 	
 	pairs = []
 	blank_image = false
