@@ -8,8 +8,11 @@
 	
 	<ul id="pairs" class="clearfix">
 		<% @study.pairs.each_with_index do |pair, id| %>
-		<li class="ui-state-default"><b><%= id+1 %></b><div id="<%= pair.choice1.image.id %>" class="pair_droppable">Left<%= image_tag(pair.choice1.image.info.thumb.url, :class => 'thumb_dropped') %></div>
-		<div id="<%= pair.choice2.image.id %> %>" class="pair_droppable">Right<%= image_tag(pair.choice2.image.info.thumb.url, :class => 'thumb_dropped') %></div></li>
+		<li><b><%= id+1 %></b>
+			<div id="<%= pair.choice1.image.id %>" class="pair_droppable">Left<%= image_tag(pair.choice1.image.info.thumb.url, :class => 'thumb_dropped') %></div>
+			<div id="<%= pair.choice2.image.id %> %>" class="pair_droppable">Right<%= image_tag(pair.choice2.image.info.thumb.url, :class => 'thumb_dropped') %></div>
+			<a href="#" role="button" class="btn btn-danger pair_delete" onClick=""><i class="icon-trash icon-white"></i></a>
+			</li>
 		<% end %>
 	</ul>
 <% end %>

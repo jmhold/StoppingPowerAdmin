@@ -8,17 +8,22 @@ $(function() {
 
 	$('#add_pair').click(function() {
 		id = $('li','#pairs').length
-		$('#pairs').append('<li class="ui-state-default"><b>'+(id+1)+'</b>'+
-		'<div id="left" class="pair_droppable">Left<img class="thumb_dropped" /></div>'+
-		'<div id="right" class="pair_droppable">Right<img class="thumb_dropped" /></div></li>');
+		$('#pairs').append('<li><b>'+(id+1)+'</b> '+
+		'<div id="left" class="pair_droppable">Left<img class="thumb_dropped" /></div> '+
+		'<div id="right" class="pair_droppable">Right<img class="thumb_dropped" /></div> '+
+		'<a href="#" role="button" class="btn btn-danger pair_delete" onClick=""><i class="icon-trash icon-white"></i></a></li>');
 		set_droppable($('#left'));
 		set_droppable($('#right'));
-		$('#left').attr('id', '-1')
-		$('#right').attr('id', '-1')
+		$('#left').attr('id', '-1');
+		$('#right').attr('id', '-1');
+		set_deletable($('li','#pairs')[id]);
 	});
 	
 	$('.pair_droppable').each(function() {
-		set_droppable($(this))
+		set_droppable($(this));
+	});
+	$('li','#pairs').each(function() {
+		set_deletable($(this));
 	});
 	$('#pairs').sortable({
 		placeholder: "ui-state-highlight pairs_placeholder",
@@ -79,4 +84,13 @@ function set_droppable(target) {
 			$(this).attr('id', ui.draggable.attr('id'))
       }
     });
+}
+
+function set_deletable(target) {
+	$('.pair_delete', target).click(function() {
+		if(confirm("Are you sure you want to delete this pair?")) {
+			target.remove();
+			relable_pairs();
+		}
+	});
 }
