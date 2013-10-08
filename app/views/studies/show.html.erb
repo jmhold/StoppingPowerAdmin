@@ -1,5 +1,30 @@
 <h2>Study: <%= @study.name %></h2>
 
+<% if @study.published %>
+<span class="label label-success">Published</span>
+<% else %>
+<span class="label label-warning">Not Published</span>
+<% end %>
+<% if @study.active %>
+<span class="label label-info">Active</span>
+<% else %>
+<span class="label label-inverse">Inactive</span>
+<% end %>
+
+<% if !@study.published %>
+<a href="<%= edit_study_path(@study.id) %>" class="btn btn-info">
+	<i class="icon-edit icon-white"></i>
+	<span>Edit</span>
+</a>
+<% end %>
+<a href="<%= study_path @study.id, format: "csv" %>" role="button" class="btn btn-warning">
+	<i class="icon-list-alt icon-white"></i>
+	<span>CSV</span>
+</a>
+<%= link_to raw('<i class="icon-retweet icon-white"></i><span> Copy</span>'), copy_study_path(@study, :active => true) , :method => 'post', :class => 'btn btn-default' %>
+
+<br /><br />
+
 <table id="pairs" class="table table-bordered table-striped data_table3 dataTable clearfix">
 	<thead>
 		<tr role="row">

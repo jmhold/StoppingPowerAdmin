@@ -1,5 +1,3 @@
-var pairs = []
-
 $(function() {
 	$( "img", $('#thumb_gallery')).draggable({
       revert: true,
@@ -9,55 +7,76 @@ $(function() {
     });
 
 	$('#add_pair').click(function() {
-		id = pairs.length
-		$('#pairs').append('<tr><td><b>'+(id+1)+'</b><div id="l'+ id + '" class="pair_droppable">Left<img class="thumb_dropped" /></div>'+
-		'<div id="r'+ id +'" class="pair_droppable">Right<img class="thumb_dropped" /></div></td></tr>')
-		set_droppable($('#l'+id));
-		set_droppable($('#r'+id));
-		pairs.push([-1,-1])
+		id = $('li','#pairs').length
+		$('#pairs').append('<li class="ui-state-default"><b>'+(id+1)+'</b>'+
+		'<div id="left" class="pair_droppable">Left<img class="thumb_dropped" /></div>'+
+		'<div id="right" class="pair_droppable">Right<img class="thumb_dropped" /></div></li>');
+		set_droppable($('#left'));
+		set_droppable($('#right'));
+		$('#left').attr('id', '-1')
+		$('#right').attr('id', '-1')
 	});
-	
-	pairs_json = $('#study_pairs_field').attr('value')
-	pairs = (JSON && JSON.parse(pairs_json)) || $.parseJSON(pairs_json);
 	
 	$('.pair_droppable').each(function() {
 		set_droppable($(this))
 	});
+	$('#pairs').sortable({
+		placeholder: "ui-state-highlight pairs_placeholder",
+		containment: "#study_form",
+		update: function( event, ui ) {
+			relable_pairs();
+		}
+	});
+	$('#pairs').disableSelection();
 	
 	$("form").submit(function() {
-		if($('#study_name').val().length <= 0) {
-			alert("Error: Study does not have a name.");
-			return false;
-		}
-		
-		unset_pair = false
-		for(var i=0; i< pairs.length; i++) {
-			pair = pairs[i]
-			for(var j=0; j<pair.length; j++) {
-				if(pair[j] == -1) {
-					unset_pair = true
-				}
-			}
-		}
-		if(unset_pair) {
-			alert("Error: One or more pairs contain blank images.");
-			return false;
-		}
-       return true;
+		return check_submit();
 	});
 });
 
+function check_submit() {
+	if($('#study_name').val().length <= 0) {
+		alert("Error: Study does not have a name.");
+		return false;
+	}
+	
+	pairs = []
+	blank_image = false
+	$('li','#pairs').each(function( index ) {
+		ids = []
+		$('.pair_droppable', this).each(function() {
+			id = $(this).attr('id');
+			if(id == -1) {
+				blank_image = true;
+			} else {
+				ids.push(id)
+			}
+		});
+		pairs.push(ids);
+	});
+	
+	if(blank_image) {
+		alert("Error: One or more pairs contain blank images.");
+		return false;
+	}
+	
+	$('#study_pairs_field').attr('value', JSON.stringify(pairs))
+    return true;
+}
+
+function relable_pairs() {
+	$('li b','#pairs').each(function( index ) {
+		$(this).text(index+1);
+	});
+}
+
 function set_droppable(target) {
 	target.droppable({
-      accept: "#thumb_gallery > img",
+      accept: "#thumb_gallery > div > img",
       activeClass: "ui-state-highlight",
       drop: function( event, ui ) {
 			$('img', this).attr('src', ui.draggable.attr('src'))
-			id = $(this).attr('id')
-			index = id.substring(1, id.length);
-			image_index = id.substring(0,1) == 'l' ? 0 : 1;
-			pairs[index][image_index] = ui.draggable.attr('title')
-			$('#study_pairs_field').attr('value', JSON.stringify(pairs))
+			$(this).attr('id', ui.draggable.attr('id'))
       }
     });
 }
