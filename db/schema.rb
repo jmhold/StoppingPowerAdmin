@@ -51,8 +51,18 @@ ActiveRecord::Schema.define(:version => 20131008213402) do
     t.datetime "updated_at",     :null => false
   end
 
-# Could not dump table "studies" because of following StandardError
-#   Unknown type 'real' for column 'timer'
+  create_table "studies", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                                                                                                                                                             :null => false
+    t.datetime "updated_at",                                                                                                                                                             :null => false
+    t.boolean  "published",    :default => false
+    t.string   "caption"
+    t.boolean  "active",       :default => false
+    t.string   "instructions", :default => "Touch the image that gets your attention first. You have two seconds to make your choice, as indicated by the time clock above the images."
+    t.float    "timer",        :default => 2.0
+  end
+
+  add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true
 
   create_table "study_images", :force => true do |t|
     t.integer  "study_id"
