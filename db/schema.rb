@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20131008213402) do
     t.boolean  "active",       :default => false
     t.string   "instructions", :default => "Touch the image that gets your attention first. You have two seconds to make your choice, as indicated by the time clock above the images."
     t.float    "timer",        :default => 2.0
+    t.boolean  "randomize",    :default => false
   end
 
   add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true

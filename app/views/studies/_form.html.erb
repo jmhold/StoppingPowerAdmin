@@ -1,6 +1,7 @@
 <%= form_for @study do |f| %>
 	<div class="half_input"><%= f.label "Study Name" %><%= f.text_field :name %></div>
 	<div class="half_input"><%= f.label "Timer Length" %><%= f.text_field :timer %></div><br />
+	<%= f.label "Randomize study pairs?", :class => "checkbox_label" %> <%= f.check_box :randomize %>
 	<%= f.label "Description" %> <%= f.text_field :caption, :class => "full_input" %>
 	<%= f.label "Instructions" %> <%= f.text_area :instructions, :class => "box_input" %><br />
 	<%= hidden_field_tag 'study[pairs]', @pairs_json, :id => 'study_pairs_field' %> 

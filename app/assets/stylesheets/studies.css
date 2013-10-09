@@ -19,7 +19,7 @@
 	text-align: center;
 	display: inline-block;
 	vertical-align: middle;
-	margin: 2px 10px;
+	margin: 2px 5px;
 	
 	border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -40,13 +40,6 @@
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	background-color: #eeeeee;
-}
-
-#pairs li span { 
-	position: absolute; 
-	margin-left: -1.3em;
-	top:50%;
-	display: inline-block;
 }
 
 .pairs_placeholder {
@@ -109,6 +102,18 @@
 
 #study_form label {
 	font-weight: bold;
+}
+
+#study_form .checkbox_label {
+	display: inline-block;
+	font-weight: normal;
+	margin: 8px 0;
+}
+
+#study_form #study_randomize {
+	width: 15px;
+	height: 15px;
+	margin-bottom: 2px;
 }
 
 #study_info b {
