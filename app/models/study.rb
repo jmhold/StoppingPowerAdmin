@@ -8,6 +8,7 @@ class Study < ActiveRecord::Base
   
   has_many :study_images, :dependent => :destroy
   has_many :pairs, :order => 'page_number ASC', :dependent => :destroy
+  has_many :results
 
   def as_json(options={})
     super(options).merge({"pairs" => self.pairs.as_json })
@@ -16,8 +17,11 @@ class Study < ActiveRecord::Base
   def to_csv(options = {})
     CSV.generate(options) do |csv|
       images = {}
+      opportunities = {}
+      result_count = self.results.size
       
       csv << ["Study: #{self.name}", "", ""]
+      csv << ["Total Results:", result_count, ""]
       csv << [""]
       
       csv << ["", "Image Type","Image Name", "Number of Wins"]
@@ -31,18 +35,18 @@ class Study < ActiveRecord::Base
         csv << ["", image2.image_type, image2.name, count2]
         csv << [""]
         
-        count1 += images[image1] if images[image1]
-        count2 += images[image2] if images[image2]
-        
-        images[image1] = count1
-        images[image2] = count2
+        accumulate count1, images, image1
+        accumulate count2, images, image2
+        accumulate 1, opportunities, image1
+        accumulate 1, opportunities, image2
       end
       
       csv << [""]
       csv << [""]
-      csv << ["Image Type","Image Name", "Overall Clicks"]
+      csv << ["Image Type","Image Name", "Overall Clicks", "Opportunities", "Win %"]
       images.each do |image, count|
-        csv << [image.image_type, image.name, count]
+        opps = opportunities[image]*result_count
+        csv << [image.image_type, image.name, count, opps, (count.to_f/opps.to_f)*100.0]
       end
     end
   end
@@ -71,5 +75,10 @@ class Study < ActiveRecord::Base
         name = base_name + " #{num}"
       end
       name
+    end
+    
+    def accumulate count, hash, key
+      count += hash[key] if hash[key]
+      hash[key] = count
     end
 end
