@@ -1,4 +1,5 @@
 <div class="span8 offset2">
+	<p><%= link_to "Back to Images", images_path %></p>
 <%= link_to image_tag(@image.info.thumb.url), @image.info.url %>
 <p>
 <%= form_for @image do |f| %>

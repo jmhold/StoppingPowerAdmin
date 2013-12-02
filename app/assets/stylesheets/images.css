@@ -1,3 +1,12 @@
+.widget-header div {
+	margin-top:5px;
+}
+
+#delete_submit {
+	margin-left : 5px;
+	padding-top: 5px;
+}
+
 .gallery_row {
 	margin-top:20px;
 	margin-bottom:20px;

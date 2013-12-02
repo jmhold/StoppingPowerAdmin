@@ -3,8 +3,10 @@ class Image < ActiveRecord::Base
   # image_type
   attr_accessible :caption, :image_type, :name
   
-  mount_uploader :info, ImageUploader
+  before_create :set_name
   
+  mount_uploader :info, ImageUploader
+    
   def filename
     paths = self.info.to_s.split('/')
     if paths.size > 0
@@ -13,4 +15,9 @@ class Image < ActiveRecord::Base
       return ""
     end
   end
+  
+  private 
+    def set_name
+      self.name = self.filename
+    end
 end
