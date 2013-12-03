@@ -1,10 +1,6 @@
 $(function() {
-	$( "img", $('#thumb_gallery')).draggable({
-      revert: true,
-      containment: "document",
-      helper: "clone",
-      cursor: "move"
-    });
+	
+	set_draggable();
 
 	$('#add_pair').click(function() {
 		id = $('li','#pairs').length
@@ -38,6 +34,15 @@ $(function() {
 		return check_submit();
 	});
 });
+
+function set_draggable() {
+	$( "img", $('#thumb_gallery')).draggable({
+      revert: true,
+      containment: "document",
+      helper: "clone",
+      cursor: "move"
+    });
+}
 
 function check_submit() {
 	if($('#study_name').val().length <= 0) {

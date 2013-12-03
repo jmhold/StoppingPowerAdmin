@@ -6,6 +6,8 @@ BradoSp::Application.routes.draw do
       put 'publish'
       put 'activate'
       post 'copy'
+    end
+    collection do
       get 'gallery'
     end
   end

@@ -56,7 +56,6 @@ class StudiesController < ApplicationController
   end
   
   def gallery
-    @study = Study.find(params[:id])
     @folder = current_folder
     @folders = Folder.all
     @images = @folder.images.where(:deleted => false)

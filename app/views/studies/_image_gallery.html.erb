@@ -13,9 +13,10 @@
 <script>
 $(function () {
 	$('#folder_select').change(function() {
-		$.get( '<%= gallery_study_path(@study.id) %>', { folder: this.value } )
+		$.get( '<%= gallery_studies_path %>', { folder: this.value } )
 		  .done(function( data ) {
 			$('#thumb_gallery').html(data);
+			set_draggable();
 		  });
 	});
 });
