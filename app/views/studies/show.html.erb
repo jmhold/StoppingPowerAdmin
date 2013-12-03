@@ -4,6 +4,7 @@
 <b>Timer Length</b><%= @study.timer %> seconds<br />
 <b>Instructions</b><%= @study.instructions %><br />
 <b>Randomize</b><%= @study.randomize ? "Yes" : "No" %><br />
+<b>Warm Up Pairs</b><%= @study.warmup_pairs %><br />
 </div><br />
 
 <% if @study.published %>
@@ -41,7 +42,8 @@
 	</thead>
 	<tbody>
 	<% @study.pairs.each_with_index do |pair, i| %>
-		<tr><td><%= i+1 %></td><td><div class="pair_droppable"><%= image_tag(pair.choice1.image.info.thumb.url) %></div></td><td>
+		<% page = i+1 %>
+		<tr><td><%= i < @study.warmup_pairs ? "Warm Up #{page}" : "Face off #{page-@study.warmup_pairs}" %></td><td><div class="pair_droppable"><%= image_tag(pair.choice1.image.info.thumb.url) %></div></td><td>
 		<div class="pair_droppable"><%= image_tag(pair.choice2.image.info.thumb.url) %></div></td></tr>
 	<% end %>
 </table>

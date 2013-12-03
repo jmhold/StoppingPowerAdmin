@@ -42,6 +42,15 @@
 	background-color: #eeeeee;
 }
 
+#pairs li.warmup {
+	background-color: #B9E6EA;
+}
+
+#pairs li b {
+	width: 20px;
+	display: inline-block;
+}
+
 .pairs_placeholder {
 	height: 50px;
 }
@@ -77,6 +86,13 @@
 	overflow-y: scroll; 
 	overflow-x: hidden;
 	height:80%;
+}
+
+#slider {
+	width: 165px;
+	height:10px;
+	display: inline-block;
+	margin-left:10px;
 }
 
 #study_form .half_input {

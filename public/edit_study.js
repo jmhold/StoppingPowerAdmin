@@ -15,6 +15,18 @@ $(function() {
 		set_deletable($('li','#pairs')[id]);
 	});
 	
+	$( "#slider" ).slider({
+	      value: parseInt($('#slider_value').text()),
+	      min: 0,
+	      max: 3,
+	      step: 1,
+	      slide: function( event, ui ) {
+			  $('#study_warm_up_pairs_field').attr('value', ui.value);
+			  $('#slider_value').html(ui.value);
+			  relable_pairs();
+	      }
+	    });
+	
 	$('.pair_droppable').each(function() {
 		set_droppable($(this));
 	});
@@ -29,6 +41,7 @@ $(function() {
 		}
 	});
 	$('#pairs').disableSelection();
+	relable_pairs();
 	
 	$("form").submit(function() {
 		return check_submit();
@@ -79,8 +92,16 @@ function check_submit() {
 }
 
 function relable_pairs() {
-	$('li b','#pairs').each(function( index ) {
-		$(this).text(index+1);
+	warmups = parseInt($('#slider_value').text());
+	$('li','#pairs').each(function( index ) {
+		num = index + 1 - warmups;
+		if(num <= 0) {
+			$('b', this).text("W" + (num+warmups));
+			$(this).attr('class','warmup');
+		} else {
+			$('b', this).text(num);
+			$(this).attr('class','');
+		}
 	});
 }
 

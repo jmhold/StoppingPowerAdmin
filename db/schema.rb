@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202191114) do
+ActiveRecord::Schema.define(:version => 20131203021839) do
 
   create_table "folders", :force => true do |t|
     t.string "name"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20131202191114) do
     t.string   "instructions", :default => "Touch the image that gets your attention first. You have two seconds to make your choice, as indicated by the time clock above the images."
     t.float    "timer",        :default => 2.0
     t.boolean  "randomize",    :default => false
+    t.integer  "warmup_pairs", :default => 0
   end
 
   add_index "studies", ["name"], :name => "index_studies_on_name", :unique => true

@@ -1,6 +1,6 @@
 class Study < ActiveRecord::Base
   # caption
-  attr_accessible :name, :caption, :instructions, :timer, :randomize
+  attr_accessible :name, :caption, :instructions, :timer, :randomize, :warmup_pairs
   
   validates :name, :presence => true, :length => {:within => 1..50}
   validates_numericality_of :timer
@@ -25,20 +25,27 @@ class Study < ActiveRecord::Base
       csv << [""]
       
       csv << ["", "Image Type","Image Name", "Number of Wins"]
-      pairs.each do |pair|
+      pairs.each_with_index do |pair|
         image1 = pair.choice1.image
         image2 = pair.choice2.image
         count1 = pair.choice1.selections.count
         count2 = pair.choice2.selections.count
+        page = pair.page_number+1
         
-        csv << ["Face Off #{pair.page_number+1}", image1.image_type, image1.name, count1]
-        csv << ["", image2.image_type, image2.name, count2]
-        csv << [""]
+        if(pair.page_number < self.warmup_pairs)
+          csv << ["Warm Up #{page}", image1.image_type, image1.name, count1]
+          csv << ["", image2.image_type, image2.name, count2]
+          csv << [""]
+        else
+          csv << ["Face Off #{page-self.warmup_pairs}", image1.image_type, image1.name, count1]
+          csv << ["", image2.image_type, image2.name, count2]
+          csv << [""]
         
-        accumulate count1, images, image1
-        accumulate count2, images, image2
-        accumulate 1, opportunities, image1
-        accumulate 1, opportunities, image2
+          accumulate count1, images, image1
+          accumulate count2, images, image2
+          accumulate 1, opportunities, image1
+          accumulate 1, opportunities, image2
+        end
       end
       
       csv << [""]
