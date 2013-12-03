@@ -1,12 +1,7 @@
-<div id="images_widget" class="widget">
-	<div class="widget-header"><span><i class="icon-camera"></i>Images</span></div>
-	<div id="thumb_gallery">
-		<% @images.each do |image| %>
-		<div class="thumb_div">
-		  	<%= image_tag image.info.thumb.url, :class => 'thumb_drag', :id => image.id %><br />
-			<%= image.filename %>
-			<br /><br />
-		</div>
-		<% end %>
-	</div>
+<% @images.each do |image| %>
+<div class="thumb_div">
+  	<%= image_tag image.info.thumb.url, :class => 'thumb_drag', :id => image.id %><br />
+	<%= image.filename %>
+	<br /><br />
 </div>
+<% end %>

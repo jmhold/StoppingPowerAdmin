@@ -1,0 +1,22 @@
+<div id="images_widget" class="widget">
+	<div class="widget-header"><span><i class="icon-camera"></i>Images</span>
+		<div class="pull-right">
+			<%= select_tag :folder_id, options_for_select(@folders.inject([]) { |r,e| r << [e.name, e.id] }, @folder.id), :id => "folder_select" %>
+		</div>
+	</div>
+	<br />
+	<div id="thumb_gallery">
+		<%= render 'image_draggables'%>
+	</div>
+</div>
+
+<script>
+$(function () {
+	$('#folder_select').change(function() {
+		$.get( '<%= gallery_study_path(@study.id) %>', { folder: this.value } )
+		  .done(function( data ) {
+			$('#thumb_gallery').html(data);
+		  });
+	});
+});
+</script>

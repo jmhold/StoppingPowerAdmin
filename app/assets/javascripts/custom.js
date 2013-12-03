@@ -18,6 +18,10 @@ function show_delete_modal(study, id) {
 	$('#delete_modal').modal('show')
 }
 
+function show_modal(modal) {
+	$(modal).modal('show')
+}
+
 function replace_id(text, new_id) {
 	return text.replace(/(\d+)/g, new_id);
 };

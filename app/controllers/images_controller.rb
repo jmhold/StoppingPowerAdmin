@@ -3,6 +3,8 @@ class ImagesController < ApplicationController
   
   def new
     @image = Image.new
+    @folder = current_folder
+    @folders = Folder.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @image }
@@ -11,7 +13,10 @@ class ImagesController < ApplicationController
   
   def create
     @image = Image.new
+    @folder = current_folder
+    @folders = Folder.all
     @image.info = params[:image][:info]
+    @image.folder_id = params[:folder_id]
     if @image.save
       respond_to do |format|
         format.html { render 'show' }
@@ -42,18 +47,30 @@ class ImagesController < ApplicationController
   end
   
   def index
-    @images = Image.where(:deleted => false)
+    @folder = current_folder
+    @folders = Folder.all
+    @images = @folder.images.where(:deleted => false)
   end
   
-  def delete
+  def modify
+    action = params[:commit].downcase
     image_ids = params[:image_ids]
+    src_folder = params[:folder_src] ? params[:folder_src] : Folder.first.id
     if(image_ids) 
-      image_ids.each do |id|
-        image = Image.find(id)
-        image.deleted = true
-        image.save!
+      if(action == 'delete')
+          image_ids.each do |id|
+            image = Image.find(id)
+            image.deleted = true
+            image.save!
+          end
+      elsif action == 'move' && params[:folder_dest]
+        image_ids.each do |id|
+          image = Image.find(id)
+          image.folder_id = params[:folder_dest]
+          image.save!
+        end
       end
     end
-    redirect_to images_path
+    redirect_to images_path(:folder => src_folder)
   end
 end

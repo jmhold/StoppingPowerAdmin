@@ -6,12 +6,13 @@ BradoSp::Application.routes.draw do
       put 'publish'
       put 'activate'
       post 'copy'
+      get 'gallery'
     end
   end
   
   resources :images do
     collection do
-      post 'delete'
+      post 'modify'
     end
   end
   
@@ -20,6 +21,8 @@ BradoSp::Application.routes.draw do
       post 'result', :format => :json
     end
   end
+  
+  resources :folders, :only => [:create, :destroy]
   
   root :to => 'studies#index'
   # The priority is based upon order of creation:

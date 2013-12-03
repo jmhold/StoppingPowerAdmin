@@ -19,7 +19,9 @@ class StudiesController < ApplicationController
   
   def new
     @study = Study.new
-    @images = Image.where(:deleted => false)
+    @folder = current_folder
+    @folders = Folder.all
+    @images = @folder.images.where(:deleted => false)
     @pairs_json = pairs_json(@study)
   end
   
@@ -32,7 +34,9 @@ class StudiesController < ApplicationController
   
   def edit
     @study = Study.find(params[:id])
-    @images = Image.where(:deleted => false)
+    @folder = current_folder
+    @folders = Folder.all
+    @images = @folder.images.where(:deleted => false)
     @pairs_json = pairs_json(@study)
     if(@study.published)
       flash[:error] = "You cannot edit a survey that has already been published."
@@ -49,6 +53,14 @@ class StudiesController < ApplicationController
     else
       redirect_to :action => 'edit'
     end
+  end
+  
+  def gallery
+    @study = Study.find(params[:id])
+    @folder = current_folder
+    @folders = Folder.all
+    @images = @folder.images.where(:deleted => false)
+    render :partial => "image_draggables", :layout => false
   end
   
   def destroy
@@ -75,6 +87,8 @@ class StudiesController < ApplicationController
     @study.save
     redirect_to :action => 'index'
   end
+  
+  private
   
   def update_pairs study, pairs_json
     if(pairs_json)

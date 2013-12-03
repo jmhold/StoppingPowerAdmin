@@ -1,10 +1,33 @@
+<b>Viewing images in:</b><br />
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <%= @folder.name %> <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+	  <% @folders.each do |folder| %>
+		  <% if folder.id != @folder.id %>
+		  <li><%= link_to folder.name, images_path(:folder => folder.id) %></li>
+		  <% end %>
+	  <% end %>
+	  <li class="divider"></li>
+	  <li><a href="#" onClick="show_modal('#add_folder_modal')">Create new folder...</a></li>
+  </ul>
+</div>
+<br /><br />
+
+<%= link_to "Delete this folder", folder_path(@folder) , :method => 'delete', :class => 'btn btn-danger' %>
+
+<br /><br />
+<%= form_tag modify_images_path do %>
+<input type="hidden" name="folder_src" value="<%= @folder.id %>" />
 <div class="widget span12 clearfix heading">
-	<%= form_tag delete_images_path do %>
     <div class="widget-header"><span><i class="icon-camera"></i>Images</span>
-		<%= submit_tag 'Delete Images', :id => "delete_submit", :class => 'btn-danger widget-button pull-right' %>
-		<a href="<%= new_image_path %>"><div class="pull-right btn-success btn">
-			<i class="icon-plus icon-white"></i> Upload More Images
-		</div></a>
+		<a href="#" onClick="show_modal('#delete_modal')"><div class="btn-danger btn pull-right">
+			<i class="icon-trash icon-white"></i> Delete Selected</div></a>
+		<a href="#" onClick="show_modal('#move_modal')"><div class="btn-warning btn pull-right">
+				<i class="icon-retweet icon-white"></i> Move Selected</div></a>
+		<a href="<%= new_image_path(:folder => @folder.id) %>"><div class="pull-right btn-success btn">
+			<i class="icon-plus icon-white"></i> Upload More Images</div></a>
 	</div>
     <div>
 	<% @images.each_with_index do |image, i| %>
@@ -15,12 +38,57 @@
 		  	<%= link_to image_tag(image.info.thumb.url, :class => 'thumb'), edit_image_path(image) %><br />
 			<%= (image.name && image.name.length > 0) ? image.name : "not named" %><br />
 			<b>Type:</b> <%= image.image_type %><br />
-			<b>Delete: </b><%= check_box_tag 'image_ids[]', image.id -%>
+			<b>Select: </b><%= check_box_tag 'image_ids[]', image.id -%>
 		  </div>
 		<% if (i % 6 == 5) %>
 		</div>
 		<% end %>
 	<% end %>
-	<% end %>
     </div>
 </div>
+
+<div id="delete_modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2>Delete images</h2>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete these images? This action cannot be undone.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+	<%= submit_tag 'Delete', :class => 'btn-danger btn pull-right' %>
+  </div>
+</div>
+
+<div id="move_modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2>Move images</h2>
+  </div>
+  <div class="modal-body">
+    <p>Move the selected images to which folder?</p>
+	<%= select_tag(:folder_dest, options_for_select(@folders.inject([]) { |r,e| r << [e.name, e.id] })) %>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+	<%= submit_tag 'Move', :class => 'btn-warning btn pull-right' %>
+  </div>
+</div>
+<% end %>
+
+<%= form_for Folder.new do |f| %>
+<div id="add_folder_modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2>Create new folder</h2>
+  </div>
+  <div class="modal-body">
+	  <%= f.label "Folder Name" %><%= f.text_field :name %><br />
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+	<%= submit_tag 'Create', :class => 'btn-success btn' %>
+  </div>
+</div>
+<% end %>

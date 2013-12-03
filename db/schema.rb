@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131008213402) do
+ActiveRecord::Schema.define(:version => 20131202191114) do
+
+  create_table "folders", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "images", :force => true do |t|
     t.string   "info"
@@ -21,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20131008213402) do
     t.string   "image_type", :default => "proposed"
     t.string   "name"
     t.boolean  "deleted",    :default => false
+    t.integer  "folder_id",  :default => 1
   end
 
   create_table "pairs", :force => true do |t|

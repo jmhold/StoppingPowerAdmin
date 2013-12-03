@@ -1,8 +1,9 @@
 <%= form_for @image, :remote => true do %>
 <h3>Upload Images</h3>
-<p><%= link_to "Back to Images", images_path %></p>
-<p>Add images to the gallery so they can be included in studies.</p>
-
+<p><%= link_to "Back to Images", images_path(:folder => @folder.id), :id => 'images_link' %></p>
+<p>Add images to the gallery so they can be included in studies. Images will be placed in the selected folder.</p>
+<%= select_tag :folder_id, options_for_select(@folders.inject([]) { |r,e| r << [e.name, e.id] }, @folder.id), :id => "folder_select" %>
+<br /><br />
 <span class="btn btn-success fileinput-button">
 	<i class="icon-plus icon-white"></i>
     <span>Upload files...</span>
@@ -13,6 +14,9 @@
 <script src="/jquery_fileupload/jquery.fileupload.js"></script>
 <script>
 $(function () {
+	$('#folder_select').change(function() {
+		$('#images_link').attr('href','<%= images_path %>' + '?folder='+this.value);
+	});
     $('#fileupload').fileupload({
         dataType: 'json',
         url: '<%= images_path %>',
