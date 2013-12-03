@@ -13,6 +13,7 @@ $(function() {
 		$('#left').attr('id', '-1');
 		$('#right').attr('id', '-1');
 		set_deletable($('li','#pairs')[id]);
+		relable_pairs();
 	});
 	
 	$( "#slider" ).slider({
