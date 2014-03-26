@@ -1,10 +1,11 @@
 CarrierWave.configure do |config|
-  
+  key = ENV['S3_KEY']
+  secret = ENV['S3_SECRET']
   if Rails.env.development?
     config.fog_credentials = {
       :provider               => 'AWS',
-      :aws_access_key_id      => 'AKIAJTXAW7XIATXTAGWA',
-      :aws_secret_access_key  => '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',
+      :aws_access_key_id      => key,
+      :aws_secret_access_key  => secret,
       :region                 => 'us-west-2',
     }
     config.fog_directory  = 'brado-sp-dev'                     # required
@@ -13,8 +14,8 @@ CarrierWave.configure do |config|
   elsif Rails.env.production?
     config.fog_credentials = {
       :provider               => 'AWS',
-      :aws_access_key_id      => 'AKIAJTXAW7XIATXTAGWA',
-      :aws_secret_access_key  => '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',
+      :aws_access_key_id      => key,
+      :aws_secret_access_key  => secret,
       :region                 => 'us-west-2',
     }
     config.fog_directory  = 'brado-sp'                     # required
